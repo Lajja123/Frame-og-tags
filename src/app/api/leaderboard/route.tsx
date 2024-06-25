@@ -23,7 +23,12 @@ const getLeaderboardData = async (): Promise<LeaderboardEntry[]> => [
 export async function GET(request: NextRequest) {
   try {
     const leaderboardData = await getLeaderboardData();
-    const backgroundImageUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/Background.svg`;
+    const backgroundImageUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/FrontBg.png`;
+    const logo = `${process.env.NEXT_PUBLIC_SITE_URL}/logo.png`;
+    const win1 = `${process.env.NEXT_PUBLIC_SITE_URL}/win1.png`;
+    const win2 = `${process.env.NEXT_PUBLIC_SITE_URL}/win2.png`;
+    const win3 = `${process.env.NEXT_PUBLIC_SITE_URL}/win3.png`;
+ 
 
     return new ImageResponse(
       (
@@ -55,70 +60,28 @@ export async function GET(request: NextRequest) {
             alt="background"
           />
 
-          {/* Title */}
-          <h1 style={{ fontSize: 48, marginBottom: 20, color: "#ffd700" }}>
-            BlackJack Leaderboard
-          </h1>
+          <img src={logo} 
+          style={{
+             
+              width: "120px",
+              height: "50px",
+              
+            }}/>
 
-          {/* Leaderboard Table */}
-          <table
+          <div
             style={{
-              width: "80%",
-              borderCollapse: "separate",
-              borderSpacing: "0 10px",
               display: "flex",
-              flexDirection: "column",
+              flexDirection: "row",
+              alignItems: "center",
+             
             }}
           >
-            <thead>
-              <tr style={{ backgroundColor: "rgba(22, 33, 62, 0.8)" }}>
-                {["Rank", "Player", "Games", "Wins"].map((header) => (
-                  <th
-                    key={header}
-                    style={{
-                      padding: "12px",
-                      textAlign: "left",
-                      color: "#ffd700",
-                      fontSize: 24,
-                    }}
-                  >
-                    {header}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {leaderboardData.map((entry, index) => (
-                <tr
-                  key={entry.rank}
-                  style={{
-                    backgroundColor:
-                      index % 2 === 0
-                        ? "rgba(15, 52, 96, 0.8)"
-                        : "rgba(26, 26, 46, 0.8)",
-                  }}
-                >
-                  <td style={{ padding: "12px", fontSize: 20 }}>
-                    {entry.rank}
-                  </td>
-                  <td style={{ padding: "12px", fontSize: 20 }}>
-                    {entry.name}
-                  </td>
-                  <td style={{ padding: "12px", fontSize: 20 }}>
-                    {entry.gamesPlayed}
-                  </td>
-                  <td style={{ padding: "12px", fontSize: 20 }}>
-                    {entry.wins}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-
-          {/* Instructions */}
-          <p style={{ fontSize: 24, marginTop: 20, textAlign: "center" }}>
-            Press "Start Game" to play!
-          </p>
+          
+          <img src={win2} style={{width:"150px", height:"180px"}}/>
+          <img src={win1} style={{width:"150px", height:"200px"}}/>
+          <img src={win3} style={{width:"150px", height:"150px"}}/>
+          </div>
+         
         </div>
       ),
       {

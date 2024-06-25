@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "BlackJack Game",
     description: "Gaming site",
-    images: [`${process.env.NEXT_PUBLIC_SITE_URL}/Background.svg`],
+    images: [`${process.env.NEXT_PUBLIC_SITE_URL}/FrontBg.png`],
   },
   other: {
     ...frameMetadata,

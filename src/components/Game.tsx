@@ -220,52 +220,102 @@ const Game: React.FC = () => {
     dealInitialHands();
   }, []);
 
+  const backgroundImageUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/FrontBg.png`;
+  const logo = `${process.env.NEXT_PUBLIC_SITE_URL}/logo.png`;
+  const win1 = `${process.env.NEXT_PUBLIC_SITE_URL}/win1.png`;
+  const win2 = `${process.env.NEXT_PUBLIC_SITE_URL}/win2.png`;
+  const win3 = `${process.env.NEXT_PUBLIC_SITE_URL}/win3.png`;
+  const p1 = `${process.env.NEXT_PUBLIC_SITE_URL}/p1.png`;
+  const p2 = `${process.env.NEXT_PUBLIC_SITE_URL}/p2.png`;
+  const p3 = `${process.env.NEXT_PUBLIC_SITE_URL}/p3.png`;
+  const top1 = `${process.env.NEXT_PUBLIC_SITE_URL}/top1.png`;
+  const top2 = `${process.env.NEXT_PUBLIC_SITE_URL}/top2.png`;
+  const top3 = `${process.env.NEXT_PUBLIC_SITE_URL}/top3.png`;
   // Render the game UI
   return (
-    <div className="game">
-      <h1>Blackjack</h1>
-      <div className="game-area">
-        <div className="player-area">
-          <h2>Player</h2>
-          <Hand cards={playerHand} isDealer={false} showAllCards={true} />
-          <p>Score: {playerScore}</p>
-          {gameStatus === "playing" && currentTurn === "player" && (
-            <>
-              <button onClick={playerHit}>Hit</button>
-              <button onClick={playerStand}>Stand</button>
-            </>
-          )}
+    <div
+      style={{
+        position: "relative",
+        top: 0,
+        left: 0,
+      }}
+    >
+      <img
+        src={backgroundImageUrl}
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "550px",
+          height: "300px",
+          objectFit: "cover",
+          zIndex: -1,
+        }}
+        alt="background"
+      />
+      <div
+        style={{
+          width: "80%",
+          margin: "0 auto",
+          textAlign: "center",
+          padding: "20px",
+        }}
+      >
+        <img src={logo} />
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-around",
+          alignItems: "flex-end",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+        
+            alignItems: "center",
+            flexDirection:"column"
+          }}
+        >
+          <img src={top1} style={{ width: "50px", height: "auto" }} />
+          <img src={p1} style={{ width: "50px", height: "auto" }} />
+          <div>Hello</div>
         </div>
-        <div className="dealer-area">
-          <h2>Dealer</h2>
-          <Hand
-            cards={dealerHand}
-            isDealer={true}
-            showAllCards={showDealerSecondCard || gameStatus !== "playing"}
-          />
-          <p>Score: {dealerScore}</p>
-          {gameStatus === "playing" && currentTurn === "dealer" && (
-            <>
-              <button onClick={dealerHit}> Hit</button>
-              <button onClick={dealerStand}> Stand</button>
-            </>
-          )}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <img src={top2} style={{ width: "50px", height: "auto" }} />
+          <img src={p2} style={{ width: "60px", height: "auto" }} />
+          <div>Hello</div>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <img src={top3} style={{ width: "50px", height: "auto" }} />
+          <img src={p3} style={{ width: "50px", height: "auto" }} />
+          <div>Hello</div>
         </div>
       </div>
-      <Deck />
-      <div className="game-status">
-        {gameStatus !== "playing" && (
-          <div>
-            <p>
-              {gameStatus === "player_wins"
-                ? "Player wins!"
-                : gameStatus === "dealer_wins"
-                ? "Dealer wins!"
-                : "Draw!"}
-            </p>
-            <button onClick={restartGame}>Restart</button>
-          </div>
-        )}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "flex-end",
+        }}
+      >
+        <img src={win2} style={{ width: "120px", height: "auto" }} />
+        <img src={win1} style={{ width: "150px", height: "auto" }} />
+        <img src={win3} style={{ width: "120px", height: "auto" }} />
       </div>
     </div>
   );
