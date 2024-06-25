@@ -1,0 +1,10 @@
+{
+  "playerCards": [
+    { "value": "10", "suit": "♠️" },
+    { "value": "5", "suit": "♣️" }
+  ],
+  "dealerCards": [
+    { "value": "4", "suit": "❤️" },
+    { "value": "7", "suit": "♦️" }
+  ]
+}
