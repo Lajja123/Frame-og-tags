@@ -228,9 +228,9 @@ const Game: React.FC = () => {
   const p1 = `${process.env.NEXT_PUBLIC_SITE_URL}/p1.png`;
   const p2 = `${process.env.NEXT_PUBLIC_SITE_URL}/p2.png`;
   const p3 = `${process.env.NEXT_PUBLIC_SITE_URL}/p3.png`;
-  const top1 = `${process.env.NEXT_PUBLIC_SITE_URL}/top1.png`;
-  const top2 = `${process.env.NEXT_PUBLIC_SITE_URL}/top2.png`;
-  const top3 = `${process.env.NEXT_PUBLIC_SITE_URL}/top3.png`;
+  const fire = `${process.env.NEXT_PUBLIC_SITE_URL}/fire.png`;
+  const vector = `${process.env.NEXT_PUBLIC_SITE_URL}/vector.png`;
+  const stats = `${process.env.NEXT_PUBLIC_SITE_URL}/stats.png`;
   const rank = `${process.env.NEXT_PUBLIC_SITE_URL}/Trophy.png`;
   // Render the game UI
   return (
@@ -378,23 +378,208 @@ const Game: React.FC = () => {
       <div
         style={{
           display: "flex",
-          flexDirection: "row",
+          flexDirection: "column",
           width: "100%",
-          alignItems: "flex-end",
+          height: "50vh",
+          alignItems: "flex-start",
           border: "3px solid white",
           background: "transparent",
-          backdropFilter: "blur(50px)",
-          borderRadius: "30px",
+
+          borderRadius: "20px",
           marginBottom: "0",
           marginLeft: "auto",
           marginRight: "auto",
           marginTop: "50px",
-          padding: "20px ",
         }}
       >
-        <div style={{ display: "flex" }}>
-          <img src={rank} />
-          <div>#001</div>
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            borderBottom: "1px solid white",
+            padding: "20px",
+            alignItems: "center",
+            background: "#461b6673",
+            borderTopLeftRadius: "20px",
+            borderTopRightRadius: "20px",
+            backdropFilter: "blur(50px)",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              position: "relative",
+              left: "26px",
+              alignItems: "center",
+            }}
+          >
+            <img src={rank} />
+            <div style={{ padding: "0px 10px", letterSpacing: "1px" }}>
+              #001
+            </div>
+          </div>
+          <div
+            style={{
+              position: "absolute",
+              left: "45%",
+              color: "#CFFF18",
+              fontSize: "2rem",
+              letterSpacing: "1px",
+            }}
+          >
+            @johndoe
+          </div>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            padding: "20px",
+            justifyContent: "space-evenly",
+          }}
+        >
+          <div style={{ fontSize: "1.5rem" }}>Games played</div>
+          <div style={{ fontSize: "1.5rem" }}>Game ratio</div>
+          <div style={{ fontSize: "1.5rem" }}>Game streek</div>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            padding: "20px",
+            justifyContent: "space-evenly",
+          }}
+        >
+          <div
+            style={{
+              position: "relative",
+              width: "200px",
+              height: "auto",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <img src={stats} alt="dealer" />
+            <div
+              style={{
+                display: "flex",
+                position: "absolute",
+                alignItems: "center",
+              }}
+            >
+              <img
+                src={vector}
+                style={{
+                  fontSize: "1.5rem",
+                  fontFamily: "Space Mono",
+                  color: "white",
+                  padding: "5px",
+                }}
+              />
+              <div
+                style={{
+                  backgroundColor: "black",
+                  fontFamily: "Space Mono",
+                  color: "#FCFF55",
+                  margin: "0px 5px",
+                  padding: "10px 25px",
+                  fontSize: "1.2rem",
+                  border: "none",
+                  borderRadius: "10px",
+                }}
+              >
+                000.356
+              </div>
+            </div>
+          </div>
+          <div
+            style={{
+              position: "relative",
+              width: "200px",
+              height: "auto",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <img src={stats} alt="dealer" />
+            <div
+              style={{
+                display: "flex",
+                position: "absolute",
+                alignItems: "center",
+              }}
+            >
+              <img
+                src={vector}
+                style={{
+                  fontSize: "1.5rem",
+                  fontFamily: "Space Mono",
+                  color: "white",
+                  padding: "5px",
+                }}
+              />
+              <div
+                style={{
+                  backgroundColor: "black",
+                  fontFamily: "Space Mono",
+                  color: "#FCFF55",
+                  margin: "0px 5px",
+                  padding: "10px 25px",
+                  fontSize: "1.2rem",
+                  border: "none",
+                  borderRadius: "10px",
+                }}
+              >
+                000.356
+              </div>
+            </div>
+          </div>
+          <div
+            style={{
+              position: "relative",
+              width: "200px",
+              height: "auto",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <img src={stats} alt="dealer" />
+            <div
+              style={{
+                display: "flex",
+                position: "absolute",
+                alignItems: "center",
+              }}
+            >
+              <img
+                src={fire}
+                style={{
+                  fontSize: "1.5rem",
+                  fontFamily: "Space Mono",
+                  color: "white",
+                  padding: "5px",
+                }}
+              />
+
+              <div
+                style={{
+                  backgroundColor: "black",
+                  fontFamily: "Space Mono",
+                  color: "#FCFF55",
+                  margin: "0px 5px",
+                  padding: "10px 25px",
+                  fontSize: "1.2rem",
+                  border: "none",
+                  borderRadius: "10px",
+                }}
+              >
+                000.356
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
