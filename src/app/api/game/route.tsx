@@ -71,6 +71,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   const body: FrameRequest = await req.json();
   const { untrustedData } = body;
   const imgUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/Background.svg`;
+  const dealer = `${process.env.NEXT_PUBLIC_SITE_URL}/dealer.png`;
+  const player = `${process.env.NEXT_PUBLIC_SITE_URL}/player.png`;
   const CARD_BACK_IMAGE = `${process.env.NEXT_PUBLIC_SITE_URL}/cards/Back.png`;
 
   let gameState: GameState;
@@ -147,6 +149,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   const searchParams = new URLSearchParams({
     title: "Blackjack",
     imgUrl,
+    dealer,
+    player,
     playerCards: gameState.playerHand
       .map((card) => getCardImageUrl(card))
       .join(","),
@@ -178,15 +182,6 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   } else {
     buttons = [{ label: "New Game", action: "post" }];
   }
-
-  const frameState = {
-    deck: gameState.deck.map((card) => ({ ...card })), // Create a new object for each card
-    playerHand: gameState.playerHand.map((card) => ({ ...card })),
-    dealerHand: gameState.dealerHand.map((card) => ({ ...card })),
-    dealerShowSecondCard: gameState.dealerShowSecondCard,
-    playerTurn: gameState.playerTurn,
-    gameStatus: gameState.gameStatus,
-  };
 
   return new NextResponse(
     getFrameHtmlResponse({

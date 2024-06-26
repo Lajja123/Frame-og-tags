@@ -231,91 +231,171 @@ const Game: React.FC = () => {
   const top1 = `${process.env.NEXT_PUBLIC_SITE_URL}/top1.png`;
   const top2 = `${process.env.NEXT_PUBLIC_SITE_URL}/top2.png`;
   const top3 = `${process.env.NEXT_PUBLIC_SITE_URL}/top3.png`;
+  const rank = `${process.env.NEXT_PUBLIC_SITE_URL}/Trophy.png`;
   // Render the game UI
   return (
+    // <div
+    //   style={{
+    //     position: "relative",
+    //     top: 0,
+    //     left: 0,
+    //   }}
+    // >
+    //   <img
+    //     src={backgroundImageUrl}
+    //     style={{
+    //       position: "absolute",
+    //       top: 0,
+    //       left: 0,
+    //       width: "550px",
+    //       height: "300px",
+    //       objectFit: "cover",
+    //       zIndex: -1,
+    //     }}
+    //     alt="background"
+    //   />
+    //   <div
+    //     style={{
+    //       width: "80%",
+    //       margin: "0 auto",
+    //       textAlign: "center",
+    //       padding: "20px",
+    //     }}
+    //   >
+    //     <img src={logo} />
+    //   </div>
+    //   <div
+    //     style={{
+    //       display: "flex",
+    //       flexDirection: "row",
+    //       alignItems: "center",
+    //       border: "1px solid white",
+    //       width: "60%",
+    //       margin: "0 auto",
+    //     }}
+    //   >
+    //     <div
+    //       style={{
+    //         display: "flex",
+    //         flexDirection: "column",
+    //         alignItems: "center",
+    //         justifyContent: "flex-end",
+    //       }}
+    //     >
+    //       <div
+    //         style={{
+    //           display: "flex",
+    //           flexDirection: "column",
+    //           alignItems: "center",
+    //         }}
+    //       >
+    //         <img src={top1} style={{ width: "20px" }} />
+    //         <img src={p2} style={{ width: "80px" }} />
+    //         <div>Hello</div>
+    //       </div>
+    //       <img src={win2} style={{ width: "150px", height: "180px" }} />
+    //     </div>
+    //     <div
+    //       style={{
+    //         display: "flex",
+    //         flexDirection: "column",
+    //         alignItems: "center",
+    //       }}
+    //     >
+    //       <div
+    //         style={{
+    //           display: "flex",
+
+    //           alignItems: "center",
+    //           flexDirection: "column",
+    //         }}
+    //       >
+    //         <img src={top2} style={{ width: "20px" }} />
+    //         <img src={p1} style={{ width: "80px" }} />
+    //         <div style={{ fontFamily: "space-mono", fontSize: "15px" }}>
+    //           Hello
+    //         </div>
+    //       </div>
+    //       <img src={win1} style={{ width: "150px", height: "200px" }} />
+    //     </div>
+    //     <div
+    //       style={{
+    //         display: "flex",
+    //         flexDirection: "column",
+    //         alignItems: "center",
+    //       }}
+    //     >
+    //       <div
+    //         style={{
+    //           display: "flex",
+    //           flexDirection: "column",
+    //           alignItems: "center",
+    //         }}
+    //       >
+    //         <img src={top3} style={{ width: "30px" }} />
+    //         <img src={p3} style={{ width: "80px" }} />
+    //         <div>Hello</div>
+    //       </div>
+    //       <img src={win3} style={{ width: "150px", height: "150px" }} />
+    //     </div>
+    //   </div>
+    // </div>
     <div
       style={{
-        position: "relative",
-        top: 0,
-        left: 0,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "100%",
+        height: "100%",
+        backgroundColor: "transparent",
+        fontFamily: "Arial, sans-serif",
+        color: "white",
       }}
     >
+      {/* Background Image */}
       <img
         src={backgroundImageUrl}
         style={{
           position: "absolute",
           top: 0,
           left: 0,
-          width: "550px",
-          height: "300px",
+          width: "100%",
+          height: "100%",
           objectFit: "cover",
           zIndex: -1,
         }}
         alt="background"
       />
-      <div
+
+      <img
+        src={logo}
         style={{
-          width: "80%",
-          margin: "0 auto",
-          textAlign: "center",
-          padding: "20px",
+          width: "120px",
+          height: "50px",
         }}
-      >
-        <img src={logo} />
-      </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-around",
-          alignItems: "flex-end",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-        
-            alignItems: "center",
-            flexDirection:"column"
-          }}
-        >
-          <img src={top1} style={{ width: "50px", height: "auto" }} />
-          <img src={p1} style={{ width: "50px", height: "auto" }} />
-          <div>Hello</div>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <img src={top2} style={{ width: "50px", height: "auto" }} />
-          <img src={p2} style={{ width: "60px", height: "auto" }} />
-          <div>Hello</div>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <img src={top3} style={{ width: "50px", height: "auto" }} />
-          <img src={p3} style={{ width: "50px", height: "auto" }} />
-          <div>Hello</div>
-        </div>
-      </div>
+      />
       <div
         style={{
           display: "flex",
           flexDirection: "row",
+          width: "100%",
           alignItems: "flex-end",
+          border: "3px solid white",
+          background: "transparent",
+          backdropFilter: "blur(50px)",
+          borderRadius: "30px",
+          marginBottom: "0",
+          marginLeft: "auto",
+          marginRight: "auto",
+          marginTop: "50px",
+          padding: "20px ",
         }}
       >
-        <img src={win2} style={{ width: "120px", height: "auto" }} />
-        <img src={win1} style={{ width: "150px", height: "auto" }} />
-        <img src={win3} style={{ width: "120px", height: "auto" }} />
+        <div style={{ display: "flex" }}>
+          <img src={rank} />
+          <div>#001</div>
+        </div>
       </div>
     </div>
   );

@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import { Space_Mono } from "next/font/google";
 import "./globals.css";
 
-const space = Space_Mono({ subsets: ["latin"] , weight: ["400", "700"]  });
+const space = Space_Mono({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",

@@ -5,9 +5,11 @@ export const runtime = "edge";
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
-    const CARD_WIDTH = 80;
-    const CARD_HEIGHT = 120;
+    const CARD_WIDTH = 120;
+    const CARD_HEIGHT = 160;
     const imgUrl = searchParams.get("imgUrl") || "";
+    const dealer = searchParams.get("dealer") || "";
+    const player = searchParams.get("player") || "";
     const playerCards = (searchParams.get("playerCards") || "").split(",");
     const dealerCards = (searchParams.get("dealerCards") || "").split(",");
     const playerSum = searchParams.get("playerSum") || "";
@@ -42,10 +44,9 @@ export async function GET(request: Request) {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              marginBottom: 20,
+              marginBottom: 40,
             }}
           >
-            <h2 style={{ fontSize: 24, marginBottom: 10 }}>Dealer's Hand</h2>
             <div style={{ display: "flex", gap: 10 }}>
               {dealerCards.map((cardUrl, index) => (
                 <img
@@ -57,16 +58,57 @@ export async function GET(request: Request) {
                 />
               ))}
             </div>
-            <p style={{ fontSize: 18, marginTop: 10 }}>
-              Sum: {dealerSum ? dealerSum : "?"}
-            </p>
+            <div
+              style={{
+                position: "relative",
+                width: "200px",
+                height: "auto",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                margin: "20px auto",
+              }}
+            >
+              <img src={dealer} alt="dealer" />
+              <div
+                style={{
+                  display: "flex",
+                  position: "absolute",
+                  alignItems: "center",
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: "1.5rem",
+                    backgroundColor: "#EB00FF",
+                    fontFamily: "Space Mono",
+                    color: "white",
+                    padding: "5px",
+                  }}
+                >
+                  Dealer
+                </div>
+                <div
+                  style={{
+                    backgroundColor: "black",
+                    fontFamily: "Space Mono",
+                    color: "#A2F9FF",
+                    padding: "10px 35px",
+                    fontSize: "1.2rem",
+                    border: "none",
+                    borderRadius: "10px",
+                  }}
+                >
+                  {dealerSum}
+                </div>
+              </div>
+            </div>
           </div>
           <div
             style={{
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              marginBottom: 20,
             }}
           >
             <div style={{ display: "flex", gap: 10 }}>
@@ -80,7 +122,51 @@ export async function GET(request: Request) {
                 />
               ))}
             </div>
-            <p style={{ fontSize: 18, marginTop: 10 }}>Sum: {playerSum}</p>
+            <div
+              style={{
+                position: "relative",
+                width: "200px",
+                height: "auto",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                margin: "20px auto",
+              }}
+            >
+              <img src={player} alt="dealer" />
+              <div
+                style={{
+                  display: "flex",
+                  position: "absolute",
+                  alignItems: "center",
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: "1.5rem",
+                    backgroundColor: "#CFFF18",
+                    fontFamily: "Space Mono",
+                    color: "#461B66",
+                    padding: "5px",
+                  }}
+                >
+                  Player
+                </div>
+                <div
+                  style={{
+                    backgroundColor: "black",
+                    fontFamily: "Space Mono",
+                    color: "#FCFF55",
+                    padding: "10px 35px",
+                    fontSize: "1.2rem",
+                    border: "none",
+                    borderRadius: "10px",
+                  }}
+                >
+                  {playerSum}
+                </div>
+              </div>
+            </div>
           </div>
           {gameStatus !== "playing" && (
             <div

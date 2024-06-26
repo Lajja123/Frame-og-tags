@@ -22,13 +22,19 @@ const getLeaderboardData = async (): Promise<LeaderboardEntry[]> => [
 
 export async function GET(request: NextRequest) {
   try {
-    const leaderboardData = await getLeaderboardData();
     const backgroundImageUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/FrontBg.png`;
     const logo = `${process.env.NEXT_PUBLIC_SITE_URL}/logo.png`;
     const win1 = `${process.env.NEXT_PUBLIC_SITE_URL}/win1.png`;
     const win2 = `${process.env.NEXT_PUBLIC_SITE_URL}/win2.png`;
-    const win3 = `${process.env.NEXT_PUBLIC_SITE_URL}/win3.png`;
- 
+    const win3 = `${process.env.NEXT_PUBLIC_SITE_URL}/Rank.png`;
+    const p1 = `${process.env.NEXT_PUBLIC_SITE_URL}/p1.png`;
+    const p2 = `${process.env.NEXT_PUBLIC_SITE_URL}/p2.png`;
+    const p3 = `${process.env.NEXT_PUBLIC_SITE_URL}/p3.png`;
+    const top1 = `${process.env.NEXT_PUBLIC_SITE_URL}/top1.png`;
+    const top2 = `${process.env.NEXT_PUBLIC_SITE_URL}/top2.png`;
+    const top3 = `${process.env.NEXT_PUBLIC_SITE_URL}/top3.png`;
+
+    // Base64-encoded Space Mono font
 
     return new ImageResponse(
       (
@@ -40,8 +46,8 @@ export async function GET(request: NextRequest) {
             justifyContent: "center",
             width: "100%",
             height: "100%",
-            backgroundColor: "#121212",
-            fontFamily: "Arial, sans-serif",
+            backgroundColor: "red",
+
             color: "white",
           }}
         >
@@ -60,28 +66,32 @@ export async function GET(request: NextRequest) {
             alt="background"
           />
 
-          <img src={logo} 
-          style={{
-             
+          <img
+            src={logo}
+            style={{
               width: "120px",
               height: "50px",
-              
-            }}/>
+            }}
+          />
 
           <div
             style={{
               display: "flex",
               flexDirection: "row",
-              alignItems: "center",
-             
+              alignItems: "flex-end",
+              border: "3px solid white",
+              background: "transparent",
+              backdropFilter: "blur(50px)",
+              borderRadius: "30px",
+              marginBottom: "0",
+              marginLeft: "auto",
+              marginRight: "auto",
+              marginTop: "50px",
+              padding: "80px 50px 0px 50px ",
             }}
           >
-          
-          <img src={win2} style={{width:"150px", height:"180px"}}/>
-          <img src={win1} style={{width:"150px", height:"200px"}}/>
-          <img src={win3} style={{width:"150px", height:"150px"}}/>
+            <div>hello</div>
           </div>
-         
         </div>
       ),
       {
