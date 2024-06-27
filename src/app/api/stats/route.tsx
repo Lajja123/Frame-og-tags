@@ -197,7 +197,7 @@ export async function GET(request: NextRequest) {
                   }}
                 >
                   <img
-                    src={vector}
+                    src={ratio}
                     style={{
                       fontSize: "1.5rem",
                       fontFamily: "Space Mono",
@@ -232,7 +232,7 @@ export async function GET(request: NextRequest) {
                   justifyContent: "center",
                 }}
               >
-                <img src={ratio} alt="dealer" />
+                <img src={stats} alt="dealer" />
                 <div
                   style={{
                     display: "flex",
