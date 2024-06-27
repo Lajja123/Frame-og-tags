@@ -222,8 +222,8 @@ const Game: React.FC = () => {
 
   const backgroundImageUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/FrontBg.png`;
   const logo = `${process.env.NEXT_PUBLIC_SITE_URL}/logo.png`;
-  const win1 = `${process.env.NEXT_PUBLIC_SITE_URL}/win1.png`;
-  const win2 = `${process.env.NEXT_PUBLIC_SITE_URL}/win2.png`;
+  const dealer = `${process.env.NEXT_PUBLIC_SITE_URL}/dealer.png`;
+  const player = `${process.env.NEXT_PUBLIC_SITE_URL}/player.png`;
   const win3 = `${process.env.NEXT_PUBLIC_SITE_URL}/win3.png`;
   const p1 = `${process.env.NEXT_PUBLIC_SITE_URL}/p1.png`;
   const p2 = `${process.env.NEXT_PUBLIC_SITE_URL}/p2.png`;
@@ -392,7 +392,7 @@ const Game: React.FC = () => {
           marginTop: "50px",
         }}
       >
-        <div
+        {/* <div
           style={{
             display: "flex",
             width: "100%",
@@ -441,7 +441,7 @@ const Game: React.FC = () => {
           <div style={{ fontSize: "1.5rem" }}>Games played</div>
           <div style={{ fontSize: "1.5rem" }}>Game ratio</div>
           <div style={{ fontSize: "1.5rem" }}>Game streek</div>
-        </div>
+        </div> */}
         <div
           style={{
             display: "flex",
@@ -450,7 +450,7 @@ const Game: React.FC = () => {
             justifyContent: "space-evenly",
           }}
         >
-          <div
+          {/* <div
             style={{
               position: "relative",
               width: "200px",
@@ -577,6 +577,97 @@ const Game: React.FC = () => {
                 }}
               >
                 000.356
+              </div>
+            </div>
+          </div> */}
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(0, 0, 0, 0.7)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: -1,
+          }}
+        >
+          <div
+            style={{
+              fontSize: 64,
+              fontWeight: 700,
+              // color: resultText.includes("win") ? "red" : "#FF0000",
+              textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
+            }}
+          >
+            ffhjhfkjhk
+          </div>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <div
+              style={{
+                position: "relative",
+                width: "200px",
+                height: "auto",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                margin: "20px auto",
+              }}
+            >
+              <img src={player} alt="player" />
+              <div
+                style={{
+                  display: "flex",
+                  position: "absolute",
+                  alignItems: "center",
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: "1.5rem",
+                    backgroundColor: "#CFFF18",
+                    fontFamily: "Space Mono",
+                    color: "#461B66",
+                    padding: "5px",
+                  }}
+                >
+                  Today Game
+                </div>
+              </div>
+            </div>
+            <div
+              style={{
+                position: "relative",
+                width: "200px",
+                height: "auto",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                margin: "20px auto",
+              }}
+            >
+              <img src={dealer} alt="player" />
+              <div
+                style={{
+                  display: "flex",
+                  position: "absolute",
+                  alignItems: "center",
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: "1.5rem",
+
+                    fontFamily: "Space Mono",
+                    color: "white",
+                    padding: "5px",
+                  }}
+                >
+                  Today Streek
+                </div>
               </div>
             </div>
           </div>

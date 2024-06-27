@@ -3,22 +3,13 @@ import { NextRequest } from "next/server";
 
 export const runtime = "edge";
 
-// This type definition should match your actual leaderboard data structure
-type LeaderboardEntry = {
-  rank: number;
-  name: string;
+type PlayerStats = {
+  rank: string;
+  username: string;
   gamesPlayed: number;
-  wins: number;
+  gameRatio: number;
+  gameStreak: number;
 };
-
-// Mock leaderboard data - replace this with actual data fetching logic
-const getLeaderboardData = async (): Promise<LeaderboardEntry[]> => [
-  { rank: 1, name: "Player1", gamesPlayed: 50, wins: 30 },
-  { rank: 2, name: "Player2", gamesPlayed: 45, wins: 25 },
-  { rank: 3, name: "Player3", gamesPlayed: 40, wins: 20 },
-  { rank: 4, name: "Player4", gamesPlayed: 35, wins: 15 },
-  { rank: 5, name: "Player5", gamesPlayed: 30, wins: 10 },
-];
 
 export async function GET(request: NextRequest) {
   try {
@@ -82,7 +73,7 @@ export async function GET(request: NextRequest) {
             style={{
               display: "flex",
               flexDirection: "column",
-              width: "100%",
+              width: "70%",
               height: "50vh",
               alignItems: "flex-start",
               border: "3px solid white",
@@ -117,7 +108,13 @@ export async function GET(request: NextRequest) {
                 }}
               >
                 <img src={rank} style={{ width: "20px" }} />
-                <div style={{ padding: "0px 10px", letterSpacing: "1px" }}>
+                <div
+                  style={{
+                    padding: "0px 10px",
+                    letterSpacing: "1px",
+                    fontSize: "1.2rem",
+                  }}
+                >
                   #001
                 </div>
               </div>
@@ -138,11 +135,154 @@ export async function GET(request: NextRequest) {
                 display: "flex",
                 width: "100%",
                 padding: "20px",
+                justifyContent: "space-around",
               }}
             >
               <div style={{ fontSize: "1.5rem" }}>Games played</div>
               <div style={{ fontSize: "1.5rem" }}>Game ratio</div>
               <div style={{ fontSize: "1.5rem" }}>Game streek</div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                width: "100%",
+                padding: "20px",
+                justifyContent: "space-around",
+              }}
+            >
+              <div
+                style={{
+                  position: "relative",
+                  width: "200px",
+                  height: "auto",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <img src={stats} alt="dealer" />
+                <div
+                  style={{
+                    display: "flex",
+                    position: "absolute",
+                    alignItems: "center",
+                  }}
+                >
+                  <img
+                    src={vector}
+                    style={{
+                      fontSize: "1.5rem",
+                      fontFamily: "Space Mono",
+                      color: "white",
+                      padding: "5px",
+                      width: "20px",
+                    }}
+                  />
+                  <div
+                    style={{
+                      backgroundColor: "black",
+                      fontFamily: "Space Mono",
+                      color: "#FCFF55",
+                      margin: "0px 5px",
+                      padding: "10px 25px",
+                      fontSize: "1.2rem",
+                      border: "none",
+                      borderRadius: "10px",
+                    }}
+                  >
+                    000.356
+                  </div>
+                </div>
+              </div>
+              <div
+                style={{
+                  position: "relative",
+                  width: "200px",
+                  height: "auto",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <img src={stats} alt="dealer" />
+                <div
+                  style={{
+                    display: "flex",
+                    position: "absolute",
+                    alignItems: "center",
+                  }}
+                >
+                  <img
+                    src={vector}
+                    style={{
+                      fontSize: "1.5rem",
+                      fontFamily: "Space Mono",
+                      color: "white",
+                      padding: "5px",
+                      width: "20px",
+                    }}
+                  />
+                  <div
+                    style={{
+                      backgroundColor: "black",
+                      fontFamily: "Space Mono",
+                      color: "#FCFF55",
+                      margin: "0px 5px",
+                      padding: "10px 25px",
+                      fontSize: "1.2rem",
+                      border: "none",
+                      borderRadius: "10px",
+                    }}
+                  >
+                    000.356
+                  </div>
+                </div>
+              </div>
+              <div
+                style={{
+                  position: "relative",
+                  width: "200px",
+                  height: "auto",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <img src={stats} alt="dealer" />
+                <div
+                  style={{
+                    display: "flex",
+                    position: "absolute",
+                    alignItems: "center",
+                  }}
+                >
+                  <img
+                    src={fire}
+                    style={{
+                      fontSize: "1.5rem",
+                      fontFamily: "Space Mono",
+                      color: "white",
+                      padding: "5px",
+                      width: "20px",
+                    }}
+                  />
+
+                  <div
+                    style={{
+                      backgroundColor: "black",
+                      fontFamily: "Space Mono",
+                      color: "#FCFF55",
+                      margin: "0px 5px",
+                      padding: "10px 25px",
+                      fontSize: "1.2rem",
+                      border: "none",
+                      borderRadius: "10px",
+                    }}
+                  >
+                    000.356
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

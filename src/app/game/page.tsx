@@ -11,7 +11,8 @@ const frameMetadata = getFrameMetadata({
     },
   ],
   image: {
-    src: `${process.env.NEXT_PUBLIC_SITE_URL}/api/stats`,
+    src: `${process.env.NEXT_PUBLIC_SITE_URL}/api/stats
+    `,
   },
 
   postUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/api/game`,

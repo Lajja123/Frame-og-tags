@@ -1,219 +1,257 @@
-import { ImageResponse } from "next/og";
+import { NextRequest, NextResponse } from "next/server";
+import { ImageResponse } from "@vercel/og";
 
-export const runtime = "edge";
+// This would typically come from a database or API
+const gameData = {
+  playerCards: [6, 36, 28],
+  dealerCards: [12, 26],
+  playerScore: 18,
+  dealerScore: 10,
+  result: 0,
+};
 
-export async function GET(request: Request) {
-  try {
-    const { searchParams } = new URL(request.url);
-    const CARD_WIDTH = 120;
-    const CARD_HEIGHT = 160;
-    const imgUrl = searchParams.get("imgUrl") || "";
-    const dealer = searchParams.get("dealer") || "";
-    const player = searchParams.get("player") || "";
-    const playerCards = (searchParams.get("playerCards") || "").split(",");
-    const dealerCards = (searchParams.get("dealerCards") || "").split(",");
-    const playerSum = searchParams.get("playerSum") || "";
-    const dealerSum = searchParams.get("dealerSum") || "";
-    const gameStatus = searchParams.get("gameStatus") || "";
+function getCardImageUrl(cardNumber: number): string {
+  const suits = ["spades", "hearts", "diamonds", "clubs"];
+  const numbers = [
+    "ace",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "jack",
+    "queen",
+    "king",
+  ];
+  const suitIndex = Math.floor(cardNumber / 13);
+  const numberIndex = cardNumber % 13;
+  return `${process.env.NEXT_PUBLIC_SITE_URL}/cards/${numbers[numberIndex]}_of_${suits[suitIndex]}.png`;
+}
 
-    return new ImageResponse(
-      (
+async function getResponse(req: NextRequest): Promise<NextResponse> {
+  const imgUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/Background.png`;
+  const dealer = `${process.env.NEXT_PUBLIC_SITE_URL}/dealer.png`;
+  const player = `${process.env.NEXT_PUBLIC_SITE_URL}/player.png`;
+
+  const playerImages = gameData.playerCards.map((card) =>
+    getCardImageUrl(card)
+  );
+  const dealerImages = gameData.dealerCards.map((card) =>
+    getCardImageUrl(card)
+  );
+
+  const resultText = ["playing", "playerWin", "dealerWin", "tie"][
+    gameData.result
+  ];
+
+  const imageResponse = new ImageResponse(
+    (
+      <div
+        style={{
+          display: "flex",
+          height: "100%",
+          width: "100%",
+          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "column",
+          backgroundColor: "#121212",
+        }}
+      >
+        <img
+          /*@ts-ignore*/
+          src={imgUrl}
+          style={{
+            position: "absolute",
+            zIndex: -1,
+          }}
+          alt="background"
+        />
+
         <div
           style={{
             display: "flex",
-            height: "100%",
-            width: "100%",
-            alignItems: "center",
-            justifyContent: "center",
             flexDirection: "column",
-            backgroundColor: "#121212" /* Dark background for contrast */,
+            alignItems: "center",
+            marginBottom: 40,
           }}
         >
-          <img
-            /*@ts-ignore*/
-            src={imgUrl}
+          <div style={{ display: "flex", gap: 10 }}>
+            {dealerImages.map((src, index) => (
+              <img
+                key={index}
+                src={src}
+                width={100} // Set your card width here
+                height={150} // Set your card height here
+                alt={`Dealer card ${index + 1}`}
+              />
+            ))}
+          </div>
+          <div
+            style={{
+              position: "relative",
+              width: "200px",
+              height: "auto",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              margin: "20px auto",
+            }}
+          >
+            <img src={dealer} alt="dealer" />{" "}
+            {/* Set your dealer image path here */}
+            <div
+              style={{
+                display: "flex",
+                position: "absolute",
+                alignItems: "center",
+              }}
+            >
+              <div
+                style={{
+                  fontSize: "1.5rem",
+                  backgroundColor: "#EB00FF",
+                  fontFamily: "Space Mono",
+                  color: "white",
+                  padding: "5px",
+                }}
+              >
+                Dealer
+              </div>
+              <div
+                style={{
+                  backgroundColor: "black",
+                  fontFamily: "Space Mono",
+                  color: "#A2F9FF",
+                  padding: "10px 35px",
+                  fontSize: "1.2rem",
+                  border: "none",
+                  borderRadius: "10px",
+                }}
+              >
+                {gameData.dealerScore}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <div style={{ display: "flex", gap: 10 }}>
+            {playerImages.map((src, index) => (
+              <img
+                key={index}
+                src={src}
+                width={100} // Set your card width here
+                height={150} // Set your card height here
+                alt={`Player card ${index + 1}`}
+              />
+            ))}
+          </div>
+          <div
+            style={{
+              position: "relative",
+              width: "200px",
+              height: "auto",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              margin: "20px auto",
+            }}
+          >
+            <img src={player} alt="player" />{" "}
+            {/* Set your player image path here */}
+            <div
+              style={{
+                display: "flex",
+                position: "absolute",
+                alignItems: "center",
+              }}
+            >
+              <div
+                style={{
+                  fontSize: "1.5rem",
+                  backgroundColor: "#CFFF18",
+                  fontFamily: "Space Mono",
+                  color: "#461B66",
+                  padding: "5px",
+                }}
+              >
+                Player
+              </div>
+              <div
+                style={{
+                  backgroundColor: "black",
+                  fontFamily: "Space Mono",
+                  color: "#FCFF55",
+                  padding: "10px 35px",
+                  fontSize: "1.2rem",
+                  border: "none",
+                  borderRadius: "10px",
+                }}
+              >
+                {gameData.playerScore}
+              </div>
+            </div>
+          </div>
+        </div>
+        {resultText !== "playing" && (
+          <div
             style={{
               position: "absolute",
-              zIndex: -1,
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              backgroundColor: "rgba(0, 0, 0, 0.5)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              zIndex: 10,
             }}
-            alt="background"
-          />
+          >
+            <div
+              style={{
+                fontSize: 64,
+                fontWeight: 700,
+                color: resultText.includes("Win") ? "#00FF00" : "#FF0000",
+                textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
+              }}
+            >
+              {resultText === "playerWin"
+                ? "You win!"
+                : resultText === "dealerWin"
+                ? "Dealer wins!"
+                : resultText === "tie"
+                ? "It's a tie!"
+                : ""}
+            </div>
+          </div>
+        )}
+      </div>
+    ),
+    {
+      width: 1200,
+      height: 630,
+    }
+  );
 
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              marginBottom: 40,
-            }}
-          >
-            <div style={{ display: "flex", gap: 10 }}>
-              {dealerCards.map((cardUrl, index) => (
-                <img
-                  key={index}
-                  src={cardUrl}
-                  width={CARD_WIDTH}
-                  height={CARD_HEIGHT}
-                  alt={`Dealer card ${index + 1}`}
-                />
-              ))}
-            </div>
-            <div
-              style={{
-                position: "relative",
-                width: "200px",
-                height: "auto",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                margin: "20px auto",
-              }}
-            >
-              <img src={dealer} alt="dealer" />
-              <div
-                style={{
-                  display: "flex",
-                  position: "absolute",
-                  alignItems: "center",
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: "1.5rem",
-                    backgroundColor: "#EB00FF",
-                    fontFamily: "Space Mono",
-                    color: "white",
-                    padding: "5px",
-                  }}
-                >
-                  Dealer
-                </div>
-                <div
-                  style={{
-                    backgroundColor: "black",
-                    fontFamily: "Space Mono",
-                    color: "#A2F9FF",
-                    padding: "10px 35px",
-                    fontSize: "1.2rem",
-                    border: "none",
-                    borderRadius: "10px",
-                  }}
-                >
-                  {dealerSum}
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <div style={{ display: "flex", gap: 10 }}>
-              {playerCards.map((cardUrl, index) => (
-                <img
-                  key={index}
-                  src={cardUrl}
-                  width={CARD_WIDTH}
-                  height={CARD_HEIGHT}
-                  alt={`Player card ${index + 1}`}
-                />
-              ))}
-            </div>
-            <div
-              style={{
-                position: "relative",
-                width: "200px",
-                height: "auto",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                margin: "20px auto",
-              }}
-            >
-              <img src={player} alt="dealer" />
-              <div
-                style={{
-                  display: "flex",
-                  position: "absolute",
-                  alignItems: "center",
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: "1.5rem",
-                    backgroundColor: "#CFFF18",
-                    fontFamily: "Space Mono",
-                    color: "#461B66",
-                    padding: "5px",
-                  }}
-                >
-                  Player
-                </div>
-                <div
-                  style={{
-                    backgroundColor: "black",
-                    fontFamily: "Space Mono",
-                    color: "#FCFF55",
-                    padding: "10px 35px",
-                    fontSize: "1.2rem",
-                    border: "none",
-                    borderRadius: "10px",
-                  }}
-                >
-                  {playerSum}
-                </div>
-              </div>
-            </div>
-          </div>
-          {gameStatus !== "playing" && (
-            <div
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                backgroundColor: "rgba(0, 0, 0, 0.5)", // Semi-transparent black overlay
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                zIndex: 10, // Ensure it's above other elements
-              }}
-            >
-              <div
-                style={{
-                  fontSize: 64,
-                  fontWeight: 700,
-                  color: gameStatus.includes("Win") ? "#00FF00" : "#FF0000", // Bright green for win, red for lose
-                  textShadow: "2px 2px 4px rgba(0,0,0,0.5)", // Add a shadow for better visibility
-                }}
-              >
-                {gameStatus === "playerBust"
-                  ? "Bust! You lose!"
-                  : gameStatus === "dealerBust"
-                  ? "Dealer busts! You win!"
-                  : gameStatus === "playerWin"
-                  ? "You win!"
-                  : gameStatus === "dealerWin"
-                  ? "Dealer wins!"
-                  : "It's a tie!"}
-              </div>
-            </div>
-          )}
-        </div>
-      ),
-      {
-        width: 1200,
-        height: 630,
-      }
-    );
-  } catch (e: any) {
-    console.log(`${e.message}`);
-    return new Response(`Failed to generate the image`, {
-      status: 500,
-    });
-  }
+  return new NextResponse(imageResponse.body, {
+    headers: {
+      "Content-Type": "image/png",
+    },
+  });
 }
+
+export async function POST(req: NextRequest): Promise<Response> {
+  return getResponse(req);
+}
+
+export const dynamic = "force-dynamic";
