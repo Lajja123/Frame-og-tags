@@ -5,19 +5,36 @@ export const runtime = "edge";
 
 export async function GET(request: NextRequest) {
   try {
-    const backgroundImageUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/FrontBg.png`;
-    const logo = `${process.env.NEXT_PUBLIC_SITE_URL}/logo.png`;
-    const win1 = `${process.env.NEXT_PUBLIC_SITE_URL}/win1.png`;
-    const win2 = `${process.env.NEXT_PUBLIC_SITE_URL}/win2.png`;
-    const win3 = `${process.env.NEXT_PUBLIC_SITE_URL}/Rank.png`;
-    const p1 = `${process.env.NEXT_PUBLIC_SITE_URL}/p1.png`;
-    const p2 = `${process.env.NEXT_PUBLIC_SITE_URL}/p2.png`;
-    const p3 = `${process.env.NEXT_PUBLIC_SITE_URL}/p3.png`;
-    const top1 = `${process.env.NEXT_PUBLIC_SITE_URL}/top1.png`;
-    const top2 = `${process.env.NEXT_PUBLIC_SITE_URL}/top2.png`;
-    const top3 = `${process.env.NEXT_PUBLIC_SITE_URL}/top3.png`;
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
-    // Base64-encoded Space Mono font
+    // Dynamic data in JSON format
+    const leaderboardData = {
+      background: `${baseUrl}/FrontBg.png`,
+      logo: `${baseUrl}/logo.png`,
+      winners: [
+        {
+          rank: 2,
+          name: "Player 2",
+          avatar: `${baseUrl}/p2.png`,
+          trophy: `${baseUrl}/top1.png`,
+          podium: `${baseUrl}/win2.png`,
+        },
+        {
+          rank: 1,
+          name: "Player 1",
+          avatar: `${baseUrl}/p1.png`,
+          trophy: `${baseUrl}/top2.png`,
+          podium: `${baseUrl}/win1.png`,
+        },
+        {
+          rank: 3,
+          name: "Player 3",
+          avatar: `${baseUrl}/p3.png`,
+          trophy: `${baseUrl}/top3.png`,
+          podium: `${baseUrl}/Rank.png`,
+        },
+      ],
+    };
 
     return new ImageResponse(
       (
@@ -30,13 +47,12 @@ export async function GET(request: NextRequest) {
             width: "100%",
             height: "100%",
             backgroundColor: "red",
-
             color: "white",
           }}
         >
           {/* Background Image */}
           <img
-            src={backgroundImageUrl}
+            src={leaderboardData.background}
             style={{
               position: "absolute",
               top: 0,
@@ -50,7 +66,7 @@ export async function GET(request: NextRequest) {
           />
 
           <img
-            src={logo}
+            src={leaderboardData.logo}
             style={{
               width: "120px",
               height: "50px",
@@ -73,71 +89,47 @@ export async function GET(request: NextRequest) {
               padding: "80px 50px 0px 50px ",
             }}
           >
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "flex-end",
-              }}
-            >
+            {leaderboardData.winners.map((winner, index) => (
               <div
+                key={index}
                 style={{
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  margin: "10px auto",
+                  justifyContent: "flex-end",
                 }}
               >
-                <img src={top1} style={{ width: "40px" }} />
-                <img src={p2} style={{ width: "80px" }} />
-                <div style={{ fontSize: "2rem" }}>Hello</div>
-              </div>
-              <img src={win2} style={{ width: "250px" }} />
-            </div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-
-                  alignItems: "center",
-                  flexDirection: "column",
-                }}
-              >
-                <img src={top2} style={{ width: "50px" }} />
-                <img src={p1} style={{ width: "100px" }} />
-                <div style={{ fontSize: "2rem", fontFamily: "Space Mono" }}>
-                  Hello
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    margin: "10px auto",
+                  }}
+                >
+                  <img
+                    src={winner.trophy}
+                    style={{ width: winner.rank === 1 ? "50px" : "40px" }}
+                  />
+                  <img
+                    src={winner.avatar}
+                    style={{ width: winner.rank === 1 ? "100px" : "80px" }}
+                  />
+                  <div
+                    style={{
+                      fontSize: "2rem",
+                      fontFamily: winner.rank === 1 ? "Space Mono" : "inherit",
+                    }}
+                  >
+                    {winner.name}
+                  </div>
                 </div>
+                <img
+                  src={winner.podium}
+                  style={{ width: winner.rank === 1 ? "350px" : "250px" }}
+                />
               </div>
-              <img src={win1} style={{ width: "350px" }} />
-            </div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                }}
-              >
-                <img src={top3} style={{ width: "40px" }} />
-                <img src={p3} style={{ width: "80px" }} />
-                <div style={{ fontSize: "2rem" }}>Hello</div>
-              </div>
-              <img src={win3} style={{ width: "250px" }} />
-            </div>
+            ))}
           </div>
         </div>
       ),

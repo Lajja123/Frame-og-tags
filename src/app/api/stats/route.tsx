@@ -33,6 +33,10 @@ export async function GET(request: NextRequest) {
     const top1 = `${process.env.NEXT_PUBLIC_SITE_URL}/top1.png`;
     const top2 = `${process.env.NEXT_PUBLIC_SITE_URL}/top2.png`;
     const top3 = `${process.env.NEXT_PUBLIC_SITE_URL}/top3.png`;
+    const fire = `${process.env.NEXT_PUBLIC_SITE_URL}/fire.png`;
+    const vector = `${process.env.NEXT_PUBLIC_SITE_URL}/vector.png`;
+    const stats = `${process.env.NEXT_PUBLIC_SITE_URL}/stats.png`;
+    const rank = `${process.env.NEXT_PUBLIC_SITE_URL}/Trophy.png`;
 
     // Base64-encoded Space Mono font
 
@@ -77,20 +81,69 @@ export async function GET(request: NextRequest) {
           <div
             style={{
               display: "flex",
-              flexDirection: "row",
-              alignItems: "flex-end",
+              flexDirection: "column",
+              width: "100%",
+              height: "50vh",
+              alignItems: "flex-start",
               border: "3px solid white",
               background: "transparent",
-              backdropFilter: "blur(50px)",
-              borderRadius: "30px",
+
+              borderRadius: "20px",
               marginBottom: "0",
               marginLeft: "auto",
               marginRight: "auto",
               marginTop: "50px",
-              padding: "80px 50px 0px 50px ",
             }}
           >
-            <div>hello</div>
+            <div
+              style={{
+                display: "flex",
+                width: "100%",
+                borderBottom: "1px solid white",
+                padding: "20px",
+                alignItems: "center",
+                background: "#461b6673",
+                borderTopLeftRadius: "20px",
+                borderTopRightRadius: "20px",
+                backdropFilter: "blur(50px)",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  position: "relative",
+                  left: "26px",
+                  alignItems: "center",
+                }}
+              >
+                <img src={rank} style={{ width: "20px" }} />
+                <div style={{ padding: "0px 10px", letterSpacing: "1px" }}>
+                  #001
+                </div>
+              </div>
+              <div
+                style={{
+                  position: "absolute",
+                  left: "45%",
+                  color: "#CFFF18",
+                  fontSize: "2rem",
+                  letterSpacing: "1px",
+                }}
+              >
+                @johndoe
+              </div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                width: "100%",
+                padding: "20px",
+              }}
+            >
+              <div style={{ fontSize: "1.5rem" }}>Games played</div>
+              <div style={{ fontSize: "1.5rem" }}>Game ratio</div>
+              <div style={{ fontSize: "1.5rem" }}>Game streek</div>
+            </div>
           </div>
         </div>
       ),
