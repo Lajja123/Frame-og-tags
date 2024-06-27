@@ -3,27 +3,11 @@ import { NextRequest } from "next/server";
 
 export const runtime = "edge";
 
-type PlayerStats = {
-  rank: string;
-  username: string;
-  gamesPlayed: number;
-  gameRatio: number;
-  gameStreak: number;
-};
-
 export async function GET(request: NextRequest) {
   try {
     const backgroundImageUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/FrontBg.png`;
     const logo = `${process.env.NEXT_PUBLIC_SITE_URL}/logo.png`;
-    const win1 = `${process.env.NEXT_PUBLIC_SITE_URL}/win1.png`;
-    const win2 = `${process.env.NEXT_PUBLIC_SITE_URL}/win2.png`;
-    const win3 = `${process.env.NEXT_PUBLIC_SITE_URL}/Rank.png`;
-    const p1 = `${process.env.NEXT_PUBLIC_SITE_URL}/p1.png`;
-    const p2 = `${process.env.NEXT_PUBLIC_SITE_URL}/p2.png`;
-    const p3 = `${process.env.NEXT_PUBLIC_SITE_URL}/p3.png`;
-    const top1 = `${process.env.NEXT_PUBLIC_SITE_URL}/top1.png`;
-    const top2 = `${process.env.NEXT_PUBLIC_SITE_URL}/top2.png`;
-    const top3 = `${process.env.NEXT_PUBLIC_SITE_URL}/top3.png`;
+    const ratio = `${process.env.NEXT_PUBLIC_SITE_URL}/ratio.png`;
     const fire = `${process.env.NEXT_PUBLIC_SITE_URL}/fire.png`;
     const vector = `${process.env.NEXT_PUBLIC_SITE_URL}/vector.png`;
     const stats = `${process.env.NEXT_PUBLIC_SITE_URL}/stats.png`;
@@ -248,7 +232,7 @@ export async function GET(request: NextRequest) {
                   justifyContent: "center",
                 }}
               >
-                <img src={stats} alt="dealer" />
+                <img src={ratio} alt="dealer" />
                 <div
                   style={{
                     display: "flex",
